@@ -14,7 +14,7 @@ const ProductCard = () => {
                 <h3 class="whitespace-nowrap tracking-tight text-md font-bold text-wrap">Adidas Samba OG Adidas Samba OG</h3>
                 </div>
                 <div class="flex items-center justify-between">
-                <span class="text-orange text-md font-bold ">49.99 THB</span>
+                <span class="text-orange text-md font-bold ">3,800 THB</span>
                 </div>
             </div>
 </div>

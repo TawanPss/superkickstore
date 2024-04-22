@@ -17,7 +17,7 @@ export default function Home() {
           <ImageSlider images={images} />
       </div>
       <div className='flex flex-col'>
-        <h1 className='text-blue italic font-bold text-center py-5 text-xl'>New Arrival</h1>
+        <h1 className='text-primary italic font-bold text-center py-5 text-xl'>New Arrival</h1>
         <div className='grid grid-cols-2 md:grid-cols-4 w-full gap-4 justify-items-center align-middle'>
             <ProductCard/>
             <ProductCard/>
@@ -26,7 +26,7 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <h1 className='text-blue italic font-bold text-center py-5 text-xl'>Brands</h1>
+        <h1 className='text-primary italic font-bold text-center py-5 text-xl'>Brands</h1>
         <div className='grid grid-cols-2 md:grid-cols-4 w-full gap-4 justify-items-center align-middle'>
         <img
                 src="https://seeklogo.com/images/A/adidas-originals-logo-504EB40D54-seeklogo.com.png"
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <h1 className='text-blue italic font-bold text-center py-5 text-xl'>Men shoes</h1>
+        <h1 className='text-primary italic font-bold text-center py-5 text-xl'>Men shoes</h1>
         <div className='grid grid-cols-2 md:grid-cols-4 w-full gap-4 justify-items-center align-middle'>
             <ProductCard/>
             <ProductCard/>
@@ -72,7 +72,7 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <h1 className='text-blue italic font-bold text-center py-5 text-xl'>Women shoes</h1>
+        <h1 className='text-primary italic font-bold text-center py-5 text-xl'>Women shoes</h1>
         <div className='grid grid-cols-2 md:grid-cols-4 w-full gap-4 justify-items-center align-middle'>
             <ProductCard/>
             <ProductCard/>

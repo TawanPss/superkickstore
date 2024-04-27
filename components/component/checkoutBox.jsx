@@ -107,7 +107,7 @@ export default function CheckoutBox() {
                 <p className="font-medium text-md ">Cash on delivery only</p>
             </div>
             <Button className="w-full bg-secondary hover:bg-secondary/80 rounded-none" type="submit">
-              Confirm Order
+              <a href="orderComplete">Confirm Order</a>
             </Button>
           </form>
         </div>

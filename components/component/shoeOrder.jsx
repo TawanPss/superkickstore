@@ -1,9 +1,24 @@
+'use client'
+
 import { CarouselItem, CarouselContent, CarouselPrevious, CarouselNext, Carousel } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { RadioGroupItem, RadioGroup } from "@/components/ui/radio-group"
+import { useState } from "react"
+import Quantity from "../ui/quantityButton"
 
 export default function ShoeOrder() {
+
+  const [quantity, setQuantity] = useState(1)
+
+    const handleSetQuantity = (quantity) => {
+        if (quantity < 1 || quantity === null || quantity === undefined || isNaN(quantity)) {
+            setQuantity(1)
+        } else {
+            setQuantity(quantity)
+        }
+    }
+
   return (
     (<div className="px-4 md:px-6 py-6">
       <div
@@ -93,13 +108,7 @@ export default function ShoeOrder() {
             </div>
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-2 mr-5">
-                <Button className="px-4 py-2 rounded" variant="outline">
-                  <MinusIcon className="w-4 h-4" />
-                </Button>
-                <span className="text-2xl font-bold">1</span>
-                <Button className="px-4 py-2 rounded" variant="outline">
-                  <PlusIcon className="w-4 h-4" />
-                </Button>
+                <Quantity quantity={quantity} setQuantity={(quantity)=> handleSetQuantity(quantity)}/>
               </div>
               <Button size="lg">Add to Cart</Button>
             </div>
@@ -117,40 +126,3 @@ export default function ShoeOrder() {
   );
 }
 
-function MinusIcon(props) {
-  return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path d="M5 12h14" />
-    </svg>)
-  );
-}
-
-
-function PlusIcon(props) {
-  return (
-    (<svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round">
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
-    </svg>)
-  );
-}

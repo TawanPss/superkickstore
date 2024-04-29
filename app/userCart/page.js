@@ -4,18 +4,15 @@ import CartBox from "@/components/component/cartBox";
 import { useState, useEffect } from "react";
 
 export default function userCart() {
-  const [data, setData] = useState(null); // Initialize data state to null
+  const [data, setData] = useState(); 
 
   useEffect(() => {
-    // Retrieve data from local storage
     const storedData = localStorage.getItem("cart");
-    // Check if data exists in local storage
     if (storedData) {
-      setData(JSON.parse(storedData)); // Parse JSON and set data state
+      setData(JSON.parse(storedData)); 
     }
   }, []);
 
-  // Use data state in JSX after it's updated
   console.log(data);
 
   return (

@@ -15,7 +15,17 @@ import Quantity from "../ui/quantityButton";
 
 export default function ShoeOrder({ brand, name, price, gender, size,image }) {
   const [quantity, setQuantity] = useState(1);
+  const [selectOrder, setSelectOrder] = useState(
+    {
+      id:'',
+      select_size:'',
+      select_qty:'',
+    }
+  );
 
+      console.log("oder",selectOrder);
+
+  
   const handleSetQuantity = (quantity) => {
     if (
       quantity < 1 ||
@@ -28,6 +38,10 @@ export default function ShoeOrder({ brand, name, price, gender, size,image }) {
       setQuantity(quantity);
     }
   };
+
+  const onClick = () =>{
+    // console.log("oder",selectOder);
+  }
 
   return (
     <div className="px-4 md:px-6 py-6">
@@ -69,6 +83,13 @@ export default function ShoeOrder({ brand, name, price, gender, size,image }) {
                 className="flex items-center gap-2"
                 defaultValue="9"
                 id="size"
+                onChange={(e) => {
+    setSelectOrder({
+      ...selectOrder,
+      select_size: e.target.value, // Update the selected size
+    });
+  }}
+
               >
                 {size?.map((size, index) => {
                   return (
@@ -90,7 +111,7 @@ export default function ShoeOrder({ brand, name, price, gender, size,image }) {
                   setQuantity={(quantity) => handleSetQuantity(quantity)}
                 />
               </div>
-              <Button size="lg">Add to Cart</Button>
+              <Button size="lg" >Add to Cart</Button>
             </div>
           </form>
           <div>

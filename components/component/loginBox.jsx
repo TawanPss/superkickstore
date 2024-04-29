@@ -7,30 +7,70 @@ import Link from "next/link";
 import AuthProvider from "@/tool/clientAuthProvider";
 import { useCallback, useState } from "react";
 import { post } from "@/api/api";
+import { useRouter } from 'next/navigation'
 
 export default function LoginBox() {
-  const [username, setUsername] = useState();
+  const router = useRouter()
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState();
+  
 
-  const postData = useCallback(async () => {
+  const postData = useCallback(async (e) => {
+    console.log('user name',username);
+    console.log('pass',password);
+    e.preventDefault();
+    // try {
+    //   const res = await post(`users/login/`, {
+    //     username: username,
+    //     password: password
+    //   });
+    //   console.log('res',res);
+    //   // console.log(res.data.access_token);
+    //   // console.log(res.data.uid);
+    //   if (res.status === 200) {
+    //     AuthProvider.login(res.data.access_token, res.data.uid);
+    //     alert("Login Success");
+    //     Router.push("/");
+    //     //console.log(res.data.access_token)
+    //     //console.log(res.data.uid)
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
     try {
-      const res = await post(`users/login/`, {
+      const response = await fetch('http://localhost:8080/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
         username: username,
         password: password
+      })
       });
-      console.log(res.data.access_token);
-      console.log(res.data.uid);
-      if (res.status === 200) {
-        AuthProvider.login(res.data.access_token, res.data.uid);
-        alert("Login Success");
-        Router.push("/");
-        //console.log(res.data.access_token)
-        //console.log(res.data.uid)
+
+      const data = await response.json(); 
+
+      if (!response.ok) {
+        alert("Username or password incorrect")
+        throw new Error('Failed to submit form');
+        
       }
+      
+     // Convert response to JSON
+      console.log("token: ", data.access_token);
+      alert("Login Success");
+      router.push('/')
+      // AuthProvider.login(data.access_token, data.uid);
+      
     } catch (error) {
-      console.log(error);
+      console.error('Error submitting form:', error);
+      
+      
+      
     }
-  }, []);
+  }, [username, password]);
+ 
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
@@ -78,7 +118,7 @@ export default function LoginBox() {
             <Button
               className="w-full rounded-none"
               onClick={(e) => {
-                postData(), e.preventDefault();
+                postData(e)
               }}
             >
               Sign in

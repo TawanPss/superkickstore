@@ -24,7 +24,7 @@ export default function ProductDetail({params}) {
 
     return (
         <>
-        <ShoeOrder brand={data?.sneakers_brand} name={data?.sneakers_name} price={data?.sneakers_price} gender={data?.sneakers_categories} size={data?.sneakers_size} image={data?.image_url}/>
+        <ShoeOrder brand={data?.sneakers_brand} name={data?.sneakers_name} price={data?.sneakers_price} gender={data?.sneakers_categories} size={data?.sneakers_size} image={data?.image_url} />
         </>
     )
 }

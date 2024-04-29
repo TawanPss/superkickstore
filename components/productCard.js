@@ -8,7 +8,7 @@ const ProductCard = ({brand, name, price,gender,id,image}) => {
             <img
                 src={image && (image[0] ?? '')}
                 alt="Product Image"
-                className="w-full h-2/3 object-cover"
+                className="aspect-square w-full h-2/3 object-cover"
                 style={{aspectRatio: "400 / 400"}}
             />
             <div className="p-2 space-y-1">

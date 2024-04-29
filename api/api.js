@@ -1,12 +1,17 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import AuthProvider from '@/tool/clientAuthProvider';
 
-function getRequestConfig(method, url, data) {
-
+function getRequestConfig(method, url, data,token) {
+    const Access_Token = AuthProvider.getAccessToken();
     const headers = {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
         Accept: 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
     };
+
+    if (token) {
+        headers.Authorization = `Bearer ${Access_Token}`;
+    }
 
     return {
         method,
@@ -32,7 +37,7 @@ async function sendRequest(config) {
     }
 }
 
-export async function get(url, params) {
+export async function get(url, params,token) {
     let queryParams = '';
     if (params) {
         const nonEmptyParams = Object.entries(params)
@@ -47,28 +52,28 @@ export async function get(url, params) {
         queryParams = nonEmptyParams.join('&');
     }
     const fullUrl = queryParams ? `${url}?${queryParams}` : url;
-    const config = getRequestConfig('get', fullUrl, undefined);
+    const config = getRequestConfig('get', fullUrl, undefined,token);
     return sendRequest(config);
 }
 
-export async function post(url, data) {
+export async function post(url, data,token) {
     const formData = new FormData();
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
             formData.append(key, data[key]);
         }
     }
-    const config = getRequestConfig('post', url, formData);
+    const config = getRequestConfig('post', url, formData,token);
     return sendRequest(config);
 }
 
-export async function deleteRequest(url, data) {
-    const config = getRequestConfig('delete', url, data);
+export async function deleteRequest(url, data,token) {
+    const config = getRequestConfig('delete', url, data,token);
     return sendRequest(config);
 }
 
-export async function put(url, data) {
-    const config = getRequestConfig('put', url, data);
+export async function put(url, data,token) {
+    const config = getRequestConfig('put', url, data,token);
     return sendRequest(config);
 }
 

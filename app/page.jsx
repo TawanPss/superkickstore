@@ -76,6 +76,7 @@ export default function Home() {
                     price={item.sneakers_price}
                     gender={item.sneakers_categories}
                     id={item.sneakers_id}
+                    image={item.image_url}
                   />
                 )}
               </>
@@ -146,6 +147,7 @@ export default function Home() {
                       price={item.sneakers_price}
                       gender={item.sneakers_categories}
                       id={item.sneakers_id}
+                      image={item.image_url}
                     />
                   )}
                 </>
@@ -169,6 +171,7 @@ export default function Home() {
                       price={item.sneakers_price}
                       gender={item.sneakers_categories}
                       id={item.sneakers_id}
+                      image={item.image_url}
                     />
                   )}
                 </>

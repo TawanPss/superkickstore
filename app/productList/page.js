@@ -33,7 +33,7 @@ export default function productList({params}) {
             data?.map((item, index) => {
                 return (
                 <ProductCard key={index} brand={item.sneakers_brand} name={item.sneakers_name} price={item.sneakers_price} gender={item.sneakers_categories}
-                id={item.sneakers_id}/>
+                id={item.sneakers_id} image={item.image_url}/>
                 )
             })
         }

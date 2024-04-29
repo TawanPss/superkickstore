@@ -38,7 +38,7 @@ export default function productList({params}) {
                 console.log(item)
                 return (
                 <ProductCard brand={item.sneakers_brand} name={item.sneakers_name} price={item.sneakers_price} gender={item.sneakers_categories}
-                id={item.sneakers_id}/>
+                id={item.sneakers_id} image={item.image_url}/>
                 )
             })
         }

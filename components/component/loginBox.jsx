@@ -14,6 +14,8 @@ export default function LoginBox() {
 
   const postData = useCallback(async () => {
     try {
+      console.log(username)
+      console.log(password)
       const res = await post(`users/login/`, {
         username: username,
         password: password
@@ -56,6 +58,7 @@ export default function LoginBox() {
               placeholder="Username"
               required
               type="text"
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
@@ -71,6 +74,7 @@ export default function LoginBox() {
               placeholder="Password"
               required
               type="password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

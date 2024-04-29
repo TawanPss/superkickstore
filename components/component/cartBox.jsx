@@ -4,7 +4,7 @@ import Quantity from "../ui/quantityButton";
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 
-export default function CartBox() {
+export default function CartBox({brand, name, price, gender, size,image,id,productquantity}) {
 
   const [quantity, setQuantity] = useState(0)
 
@@ -27,7 +27,7 @@ export default function CartBox() {
                 alt="Product Image"
                 className="rounded-md"
                 height={80}
-                src="/placeholder.svg"
+                src={image && (image[0] ?? '')}
                 style={{
                   aspectRatio: "80/80",
                   objectFit: "cover",
@@ -35,13 +35,13 @@ export default function CartBox() {
                 width={80} />
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold text-lg">Acme Widgets</h3>
-              <p className="text-gray-500 dark:text-gray-400">Pack of 3</p>
+              <h3 className="font-semibold text-lg">{`${brand} ${name}`}</h3>
+              <p className="text-gray-500 dark:text-gray-400">{`${gender}`}</p>
             </div>
             <div className="flex items-center gap-2">
               <Quantity quantity={quantity} setQuantity={(quantity)=> handleSetQuantity(quantity)}/>
             </div>
-            <div className="text-base font-medium">$29.99</div>
+            <div className="text-base font-medium">{`${price}`} THB</div>
             
           </div>
 
@@ -49,7 +49,7 @@ export default function CartBox() {
         </div>
         <div
           className="flex flex-col md:flex-row items-end justify-between gap-4">
-          <div className="text-lg font-medium">Total: $49.98</div>
+          <div className="text-lg font-medium">Total: {`${price}`} THB</div>
           <div className="flex flex-row gap-2">
             <Button  className="bg-primary text-primary-foreground  " variant="outline"><a href="/">Continue Shopping</a></Button>
             <Button className="bg-green-500 text-primary-foreground hover:bg-green-200 hover:text-green-500"><a href="Checkout">Proceed to Checkout</a></Button>

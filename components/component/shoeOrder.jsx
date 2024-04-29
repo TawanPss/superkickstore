@@ -10,10 +10,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroupItem, RadioGroup } from "@/components/ui/radio-group";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import Quantity from "../ui/quantityButton";
+import { post } from "@/api/api";
+import { useCallback} from "react";
+import { stringify } from "postcss";
 
-export default function ShoeOrder({ brand, name, price, gender, size,image }) {
+export default function ShoeOrder({ brand, name, price, gender, size,image,id}) {
   const [quantity, setQuantity] = useState(1);
 
   const handleSetQuantity = (quantity) => {
@@ -24,10 +27,27 @@ export default function ShoeOrder({ brand, name, price, gender, size,image }) {
       isNaN(quantity)
     ) {
       setQuantity(1);
+      //orderData.quantity = 1
     } else {
       setQuantity(quantity);
+      //orderData.quantity = quantity
     }
   };
+
+  useEffect(() => {
+    // Define orderData inside useEffect to ensure it has the latest quantity value
+    const orderData = {
+      product_id: id,
+      brand:brand,
+      name:name,
+      size:size,
+      image:image,
+      product_quantity: quantity,
+      price_per_unit: price,
+      gender:gender,
+    };
+    localStorage.setItem('cart', JSON.stringify(orderData));
+  }, [quantity, id, price]);
 
   return (
     <div className="px-4 md:px-6 py-6">
@@ -90,7 +110,9 @@ export default function ShoeOrder({ brand, name, price, gender, size,image }) {
                   setQuantity={(quantity) => handleSetQuantity(quantity)}
                 />
               </div>
-              <Button size="lg">Add to Cart</Button>
+              <Button size="lg" onClick={(e) => {
+                postData(), e.preventDefault();
+              }}>Add to Cart</Button>
             </div>
           </form>
           <div>

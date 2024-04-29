@@ -34,7 +34,7 @@ const Navbar = () => {
           </div>
 
           <ul className="hidden md:flex space-x-4">
-            <li><a href="/product/all-gender" className="text-white hover:text-secondary">New Arrival</a></li>
+            <li><a href="/productList" className="text-white hover:text-secondary">New Arrival</a></li>
             <li className="relative">
               <a href="" className="text-white hover:text-secondary" onClick={(e) => { e.preventDefault(); toggleMenu(); }}>▼ Brand</a>
               {/* Dropdown menu */}
@@ -57,7 +57,7 @@ const Navbar = () => {
         {/* --------------------Mobile menu--------------------------- */}
         {isOpen && (
             <ul className="flex-col md:hidden ">
-                <li className="py-1"><a href="/product/all-gender" className="text-white hover:text-secondary">New Arrival</a></li>
+                <li className="py-1"><a href="/productList" className="text-white hover:text-secondary">New Arrival</a></li>
                 <li className="py-1">
                   <div className="flex items-center w-full" onClick={(e) => { e.preventDefault(); mbToggleMenu(); }}>
                       <h3 className="text-white hover:text-secondary" >Brand</h3>

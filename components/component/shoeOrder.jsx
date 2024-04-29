@@ -7,7 +7,7 @@ import { RadioGroupItem, RadioGroup } from "@/components/ui/radio-group"
 import { useState } from "react"
 import Quantity from "../ui/quantityButton"
 
-export default function ShoeOrder() {
+export default function ShoeOrder({brand, name, price,gender,size}) {
 
   const [quantity, setQuantity] = useState(1)
 
@@ -65,8 +65,8 @@ export default function ShoeOrder() {
         </div>
         <div className="grid gap-4 md:gap-10">
           <div>
-            <h1 className="font-bold text-3xl lg:text-4xl">Acme Leather Sneakers</h1>
-            <div className="text-3xl text-secondary font-bold">999,999 THB</div>
+            <h1 className="font-bold text-3xl lg:text-4xl">{`${brand} ${name}`}</h1>
+            <div className="text-3xl text-secondary font-bold">{`${price}`} THB</div>
           </div>
           <form className="grid gap-4 md:gap-6">
             <div className="grid gap-2">
@@ -78,7 +78,7 @@ export default function ShoeOrder() {
                   className="border cursor-pointer rounded-md p-2 flex items-center gap-2 [&:has(:checked)]:bg-gray-100 dark:[&:has(:checked)]:bg-gray-800"
                   htmlFor="size-7">
                   <RadioGroupItem id="size-7" value="7" />
-                  7
+                  {size}
                 </Label>
                 <Label
                   className="border cursor-pointer rounded-md p-2 flex items-center gap-2 [&:has(:checked)]:bg-gray-100 dark:[&:has(:checked)]:bg-gray-800"
@@ -116,7 +116,7 @@ export default function ShoeOrder() {
           <div>
             <h1 className="font-bold text-lg lg:text-xl">Product Detail</h1>
             <p className="text-gray-500 dark:text-gray-400 mt-2">
-              Crafted with premium leather and a comfortable sole, these sneakers are perfect for everyday wear.
+              {gender} shoes
             </p>
             
           </div>

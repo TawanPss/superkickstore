@@ -12,7 +12,7 @@ export default function ProductDetail({params}) {
         try {
           const res = await get(`products/products/${params.item}`, undefined);
           setData(res.data)
-          console.log(res.data)
+          //console.log(res.data)
         } catch (error) {
           console.log(error);
         }
@@ -24,7 +24,7 @@ export default function ProductDetail({params}) {
 
     return (
         <>
-        <ShoeOrder brand={data?.sneakers_brand} name={data?.sneakers_name} price={data?.sneakers_price} gender={data?.sneakers_categories} size={data?.sneakers_size} image={data?.image_url} />
+        <ShoeOrder brand={data?.sneakers_brand} name={data?.sneakers_name} price={data?.sneakers_price} gender={data?.sneakers_categories} size={data?.sneakers_size} image={data?.image_url} id={data?.sneakers_id}/>
         </>
     )
 }

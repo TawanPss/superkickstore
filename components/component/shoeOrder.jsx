@@ -10,22 +10,33 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroupItem, RadioGroup } from "@/components/ui/radio-group";
-import { useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Quantity from "../ui/quantityButton";
 
-export default function ShoeOrder({ brand, name, price, gender, size,image }) {
+export default function ShoeOrder({
+  brand,
+  name,
+  price,
+  gender,
+  size,
+  image,
+  id,
+}) {
   const [quantity, setQuantity] = useState(1);
-  const [selectOrder, setSelectOrder] = useState(
-    {
-      id:'',
-      select_size:'',
-      select_qty:'',
-    }
-  );
+  // const existingOrdersJSON = localStorage.getItem('selectOrders');
+  // const existingOrders = existingOrdersJSON ? JSON.parse(existingOrdersJSON) : [];
 
-      console.log("oder",selectOrder);
+  const [selectOrder, setSelectOrder] = useState({
+    id: "",
+    select_size: "9",
+    select_qty: "1",
+    name: "",
+  });
 
-  
+  // useEffect(()=>{
+
+  // }[selectOder])
+
   const handleSetQuantity = (quantity) => {
     if (
       quantity < 1 ||
@@ -36,22 +47,55 @@ export default function ShoeOrder({ brand, name, price, gender, size,image }) {
       setQuantity(1);
     } else {
       setQuantity(quantity);
+      setSelectOrder({
+        ...selectOrder,
+        select_qty: quantity,
+      });
     }
   };
 
-  const onClick = () =>{
-    // console.log("oder",selectOder);
-  }
+  // Function to handle size selection
+  const handleSizeSelection = (e) => {
+    const selectedSize = e.target.value; // Get the selected size value
+    setSelectOrder((prevState) => ({
+      ...prevState,
+      select_size: selectedSize,
+      id: id, // Update the selected size in the state
+      sneakers_name: name,
+      image_url: image,
+      price: price,
+    }));
+  };
 
+  // console.log("oder",selectOrder);
+
+  // const updatedOrders = [...existingOrders, selectOrder];
+
+  const handleAddtoCart = () => {
+    // localStorage.setItem('selectOrder', JSON.stringify(updatedOrders));
+    // Retrieve existing data from local storage
+    const existingOrdersJSON = localStorage.getItem("selectOrder");
+
+    // Parse existing data into JavaScript object or initialize as an empty array if no data exists
+    const existingOrders = existingOrdersJSON
+      ? JSON.parse(existingOrdersJSON)
+      : [];
+
+    // Add the new item to the existing data
+    existingOrders.push(selectOrder); // Assuming selectOrder contains the new item
+
+    // Store the updated data back into local storage
+    localStorage.setItem("selectOrder", JSON.stringify(existingOrders));
+  };
   return (
     <div className="px-4 md:px-6 py-6">
       <div className="grid md:grid-cols-2 gap-6 lg:gap-12 items-start max-w-6xl mx-auto">
         <div className="grid gap-4">
           <Carousel className="w-full max-w-md">
             <CarouselContent>
-            {image?.map((image, index) => {
-                  return (
-                    <CarouselItem>
+              {image?.map((image, index) => {
+                return (
+                  <CarouselItem>
                     <img
                       alt="Shoe Image"
                       className="aspect-square object-cover border border-gray-200 w-full rounded-lg overflow-hidden dark:border-gray-800"
@@ -60,8 +104,8 @@ export default function ShoeOrder({ brand, name, price, gender, size,image }) {
                       width={600}
                     />
                   </CarouselItem>
-                  );
-                })}
+                );
+              })}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
@@ -83,13 +127,7 @@ export default function ShoeOrder({ brand, name, price, gender, size,image }) {
                 className="flex items-center gap-2"
                 defaultValue="9"
                 id="size"
-                onChange={(e) => {
-    setSelectOrder({
-      ...selectOrder,
-      select_size: e.target.value, // Update the selected size
-    });
-  }}
-
+                onChange={handleSizeSelection}
               >
                 {size?.map((size, index) => {
                   return (
@@ -97,7 +135,11 @@ export default function ShoeOrder({ brand, name, price, gender, size,image }) {
                       className="border cursor-pointer rounded-md p-2 flex items-center gap-2 [&:has(:checked)]:bg-gray-100 dark:[&:has(:checked)]:bg-gray-800"
                       htmlFor={size}
                     >
-                      <RadioGroupItem id={size} value={size.split(" ")[0]} />
+                      <RadioGroupItem
+                        id={size}
+                        value={size.split(" ")[0]}
+                        defaultValue="9"
+                      />
                       {size}
                     </Label>
                   );
@@ -111,7 +153,9 @@ export default function ShoeOrder({ brand, name, price, gender, size,image }) {
                   setQuantity={(quantity) => handleSetQuantity(quantity)}
                 />
               </div>
-              <Button size="lg" >Add to Cart</Button>
+              <Button size="lg" onClick={() => handleAddtoCart()}>
+                Add to Cart
+              </Button>
             </div>
           </form>
           <div>

@@ -17,7 +17,7 @@ export default function CartBox() {
     return total + item.price * item.select_qty;
   }, 0);
 
-  console.log("storeOder", storedOrder);
+  console.log("storeOrder", storedOrder);
 
   const handleSetQuantity = (quantity) => {
     if (

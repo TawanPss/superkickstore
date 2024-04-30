@@ -12,6 +12,8 @@ import { Label } from "@/components/ui/label";
 import { RadioGroupItem, RadioGroup } from "@/components/ui/radio-group";
 import { useCallback, useState, useEffect } from "react";
 import Quantity from "../ui/quantityButton";
+import AuthProvider from "@/tool/clientAuthProvider";
+import { useRouter } from "next/navigation";
 
 export default function ShoeOrder({
   brand,
@@ -32,7 +34,7 @@ export default function ShoeOrder({
     select_qty: "1",
     name: "",
   });
-
+  const router = useRouter();
   // useEffect(()=>{
 
   // }[selectOder])
@@ -72,6 +74,8 @@ export default function ShoeOrder({
   // const updatedOrders = [...existingOrders, selectOrder];
 
   const handleAddtoCart = () => {
+    const token = AuthProvider.getAccessToken();
+    console.log("Token:", token);
     // localStorage.setItem('selectOrder', JSON.stringify(updatedOrders));
     // Retrieve existing data from local storage
     const existingOrdersJSON = localStorage.getItem("selectOrder");
@@ -125,7 +129,7 @@ export default function ShoeOrder({
               </Label>
               <RadioGroup
                 className="flex items-center gap-2"
-                defaultValue="9"
+                // defaultValue="9"
                 id="size"
                 onChange={handleSizeSelection}
               >
@@ -138,7 +142,7 @@ export default function ShoeOrder({
                       <RadioGroupItem
                         id={size}
                         value={size.split(" ")[0]}
-                        defaultValue="9"
+                        // defaultValue="9"
                       />
                       {size}
                     </Label>
